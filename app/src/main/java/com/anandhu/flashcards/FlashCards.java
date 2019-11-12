@@ -1,6 +1,8 @@
 package com.anandhu.flashcards;
 
-public class FlashCards {
+import java.io.Serializable;
+
+public class FlashCards implements Serializable{
     public String set;
 
     public FlashCards(String set){

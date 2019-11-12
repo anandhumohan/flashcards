@@ -1,5 +1,6 @@
 package com.anandhu.flashcards;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.*;
 
 public class FlashCardAdaptor extends RecyclerView.Adapter<FlashCardAdaptor.FlashCardViewHolder>{
     private List<FlashCards> flashCardsList;
+    private FlashCards flashCards;
     Context context;
 
     public FlashCardAdaptor(List<FlashCards> flashCardsList, Context context) {
@@ -30,6 +33,16 @@ public class FlashCardAdaptor extends RecyclerView.Adapter<FlashCardAdaptor.Flas
     @Override
     public void onBindViewHolder(FlashCardViewHolder holder, final int position) {
         holder.txtSet.setText(flashCardsList.get(position).getSet());
+        flashCards = flashCardsList.get(position);
+
+        holder.txtSet.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,cards.class);
+                //intent.putExtra("key", (Serializable) flashCardsList);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
