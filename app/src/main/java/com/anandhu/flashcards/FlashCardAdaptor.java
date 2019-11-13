@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.*;
 
 public class FlashCardAdaptor extends RecyclerView.Adapter<FlashCardAdaptor.FlashCardViewHolder>{
@@ -38,7 +36,7 @@ public class FlashCardAdaptor extends RecyclerView.Adapter<FlashCardAdaptor.Flas
         holder.txtSet.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,cards.class);
+                Intent intent = new Intent(context,Cards.class);
                 //intent.putExtra("key", (Serializable) flashCardsList);
                 context.startActivity(intent);
             }
