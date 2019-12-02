@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,36 +13,38 @@ public class Cards extends AppCompatActivity{
     private RecyclerView mRecyclerView;
     private CardAdaptor fAdapter;
     private List<FlashCards> setList;
+    private DataBaseHelper dataBaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
 
-        //getting the recyclerview from xml
-        mRecyclerView = (RecyclerView) findViewById(R.id.idRecyclerView);
-        //mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            Intent intent = getIntent();
+            int value = intent.getIntExtra("key",0);
 
+            dataBaseHelper = new DataBaseHelper(this);
+            List<String> deckList = (List<String>) dataBaseHelper.getAllCardsWithDeckId(value);
 
-        setList = new ArrayList<>();
-        setList.add(new FlashCards("Word 1"));
-        setList.add(new FlashCards("Word 2"));
-        setList.add(new FlashCards("Word 3"));
-        setList.add(new FlashCards("Word 4"));
-        setList.add(new FlashCards("Word 5"));
-        setList.add(new FlashCards("Word 6"));
-        setList.add(new FlashCards("Word 7"));
-        setList.add(new FlashCards("Word 8"));
-        setList.add(new FlashCards("Word 9"));
-        setList.add(new FlashCards("Word 10"));
+            //getting the recyclerview from xml
+            mRecyclerView = (RecyclerView) findViewById(R.id.idRecyclerView);
+            //mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+            setList = new ArrayList<>();
+            for(int i = 0; i < deckList.size(); i++){
+                setList.add(new FlashCards(deckList.get(i)));
+            }
 
 
-        //set adapter to recyclerview
-        //mRecyclerView = (RecyclerView) findViewById(R.id.);
-        fAdapter = new CardAdaptor(setList,this);
-        mRecyclerView.setAdapter(fAdapter);
+            //set adapter to recyclerview
+            //mRecyclerView = (RecyclerView) findViewById(R.id.);
+            fAdapter = new CardAdaptor(setList, this);
+            mRecyclerView.setAdapter(fAdapter);
+        }catch (Exception e){
+
+        }
     }
 }

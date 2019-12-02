@@ -15,32 +15,27 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private FlashCardAdaptor fAdapter;
     private List<FlashCards> setList;
+    private DataBaseHelper dataBaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        dataBaseHelper = new DataBaseHelper(this);
+        dataBaseHelper.createDeck(this);
+        dataBaseHelper.createCard(this);
+        List<String> deckList = (List<String>) dataBaseHelper.getAllDecks();
+
         //getting the recyclerview from xml
         mRecyclerView = (RecyclerView) findViewById(R.id.idRecyclerView);
         //mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //Populate the products
         setList = new ArrayList<>();
-        setList.add(new FlashCards("Flash car set 1"));
-        setList.add(new FlashCards("Flash car set 2"));
-        setList.add(new FlashCards("Flash car set 3"));
-        setList.add(new FlashCards("Flash car set 4"));
-        setList.add(new FlashCards("Flash car set 5"));
-        setList.add(new FlashCards("Flash car set 6"));
-        setList.add(new FlashCards("Flash car set 7"));
-        setList.add(new FlashCards("Flash car set 8"));
-        setList.add(new FlashCards("Flash car set 9"));
-        setList.add(new FlashCards("Flash car set 10"));
-
-
-
+        for(int i = 0; i < deckList.size(); i++){
+            setList.add(new FlashCards(deckList.get(i)));
+        }
 
         //set adapter to recyclerview
         fAdapter = new FlashCardAdaptor(setList,this);

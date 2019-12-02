@@ -36,9 +36,16 @@ public class FlashCardAdaptor extends RecyclerView.Adapter<FlashCardAdaptor.Flas
         holder.txtSet.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,Cards.class);
-                //intent.putExtra("key", (Serializable) flashCardsList);
-                context.startActivity(intent);
+                try {
+                    Intent intent = new Intent(context, Cards.class);
+                    System.out.print(position);
+                    System.out.print(flashCards.getSet());
+                    Integer id = position;
+                    intent.putExtra("key", (id+1));
+                    context.startActivity(intent);
+                }catch (Exception e){
+
+                }
             }
         });
     }
