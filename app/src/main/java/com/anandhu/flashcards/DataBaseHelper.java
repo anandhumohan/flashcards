@@ -156,8 +156,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     }
 
-    public List<String> getAllCardsWithDeckId(int value) {
-        List<String> deckList = new ArrayList<String>();
+    public List<Card> getAllCardsWithDeckId(int value) {
+        List<Card> deckList = new ArrayList<Card>();
+        Card card = null;
 
         try {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -165,7 +166,10 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             res.moveToFirst();
 
             while (res.isAfterLast() == false) {
-                deckList.add(res.getString(res.getColumnIndex(WORD)));
+                card = new Card();
+                card.setWord(res.getString(res.getColumnIndex(WORD)));
+                card.setMeanig(res.getString(res.getColumnIndex(MEANING)));
+                deckList.add(card);
                 res.moveToNext();
             }
         }catch(Exception e){

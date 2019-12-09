@@ -12,10 +12,10 @@ import android.widget.TextView;
 import java.util.List;
 
 public class CardAdaptor extends RecyclerView.Adapter<CardAdaptor.CardViewHolder>{
-    private List<FlashCards> cardList;
+    private List<Card> cardList;
     Context context;
 
-    public CardAdaptor(List<FlashCards> cardList, Context context) {
+    public CardAdaptor(List<Card> cardList, Context context) {
         this.cardList = cardList;
         this.context = context;
     }
@@ -30,7 +30,9 @@ public class CardAdaptor extends RecyclerView.Adapter<CardAdaptor.CardViewHolder
 
     @Override
     public void onBindViewHolder(CardAdaptor.CardViewHolder holder, final int position) {
-        holder.txtSet.setText(cardList.get(position).getSet());
+        holder.txtSet.setText(cardList.get(position).getWord());
+        holder.txtMeaning.setText(cardList.get(position).getMeanig());
+
     }
 
     @Override
@@ -40,9 +42,11 @@ public class CardAdaptor extends RecyclerView.Adapter<CardAdaptor.CardViewHolder
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
         TextView txtSet;
+        TextView txtMeaning;
         public CardViewHolder(View view) {
             super(view);
             txtSet = view.findViewById(R.id.idSetName);
+            txtMeaning = view.findViewById(R.id.idSetMeaning);
         }
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 public class Cards extends AppCompatActivity{
     private RecyclerView mRecyclerView;
     private CardAdaptor fAdapter;
-    private List<FlashCards> setList;
+    private List<Card> setList;
     private DataBaseHelper dataBaseHelper;
 
     @Override
@@ -25,7 +25,7 @@ public class Cards extends AppCompatActivity{
             int value = intent.getIntExtra("key",0);
 
             dataBaseHelper = new DataBaseHelper(this);
-            List<String> deckList = (List<String>) dataBaseHelper.getAllCardsWithDeckId(value);
+            List<Card> deckList = (List<Card>) dataBaseHelper.getAllCardsWithDeckId(value);
 
             //getting the recyclerview from xml
             mRecyclerView = (RecyclerView) findViewById(R.id.idRecyclerView);
@@ -33,9 +33,13 @@ public class Cards extends AppCompatActivity{
             mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-            setList = new ArrayList<>();
+            setList = new ArrayList<Card>();
+            Card ca = null;
             for(int i = 0; i < deckList.size(); i++){
-                setList.add(new FlashCards(deckList.get(i)));
+                ca = new Card();
+                ca.setWord(deckList.get(i).getWord());
+                ca.setMeanig(deckList.get(i).getMeanig());
+                setList.add(ca);
             }
 
 
