@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
-import android.app.Activity;
-import android.app.Fragment;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -19,13 +17,13 @@ import android.database.Cursor;
 public class DataBaseHelper extends SQLiteOpenHelper{
 
     public static final String DATABASE_NAME = "flashcards.db";
-    public final static String TABLE_NAME = "deck";
+    public final static String TABLE_DECK = "deck";
     public final static String TABLE_CARD = "card";
     public final static String ID = "ID";
     public final static String NAME = "NAME";
     public final static String WORD = "WORD";
     public final static String MEANING = "MEANING";
-    final static String DECK_ID = "DECK_ID";
+    public final static String DECK_ID = "DECK_ID";
     public final static String IS_COMPLETE = "IS_COMPLETE";
 
     public DataBaseHelper(Context contex) {
@@ -34,8 +32,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE="CREATE TABLE IF NOT EXISTS "+TABLE_NAME+" ("+ID+" INTEGER PRIMARY KEY, "+NAME+" TEXT, "+IS_COMPLETE+" TEXT)";
-        String CREATE_CARD="CREATE TABLE IF NOT EXISTS "+TABLE_CARD+" ("+ID+" INTEGER PRIMARY KEY, "+WORD+" TEXT, "+MEANING+" TEXT, "+IS_COMPLETE+" TEXT, "+DECK_ID+" INTEGER, FOREIGN KEY ("+DECK_ID+") REFERENCES "+TABLE_NAME+"("+ID+"))";
+        String CREATE_TABLE="CREATE TABLE IF NOT EXISTS "+TABLE_DECK+" ("+ID+" INTEGER PRIMARY KEY, "+NAME+" TEXT, "+IS_COMPLETE+" TEXT)";
+        String CREATE_CARD="CREATE TABLE IF NOT EXISTS "+TABLE_CARD+" ("+ID+" INTEGER PRIMARY KEY, "+WORD+" TEXT, "+MEANING+" TEXT, "+IS_COMPLETE+" TEXT, "+DECK_ID+" INTEGER, FOREIGN KEY ("+DECK_ID+") REFERENCES "+TABLE_DECK+"("+ID+"))";
 
         db.execSQL(CREATE_TABLE);
         db.execSQL(CREATE_CARD);
@@ -43,7 +41,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_DECK);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_CARD);
         onCreate(db);
     }
 
@@ -77,7 +76,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
                 ContentValues values = new ContentValues();
                 values.put("NAME", name);
                 values.put("ID", i+1);
-                long newRowId = db.insert(TABLE_NAME, null, values);
+                long newRowId = db.insert(TABLE_DECK, null, values);
             }
 
 
@@ -168,7 +167,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             while (res.isAfterLast() == false) {
                 card = new Card();
                 card.setWord(res.getString(res.getColumnIndex(WORD)));
-                card.setMeanig(res.getString(res.getColumnIndex(MEANING)));
+                card.setMeaning(res.getString(res.getColumnIndex(MEANING)));
                 deckList.add(card);
                 res.moveToNext();
             }

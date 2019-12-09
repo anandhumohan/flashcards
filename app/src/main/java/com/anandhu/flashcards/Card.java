@@ -3,9 +3,9 @@ package com.anandhu.flashcards;
 public class Card{
     public Integer id;
     public String word;
-    public String meanig;
-    public String deckId;
-    public String is_completed;
+    public String meaning;
+    public Integer deckId;
+    public Integer isCompleted;
 
     public Integer getId() {
         return id;
@@ -23,27 +23,27 @@ public class Card{
         this.word = word;
     }
 
-    public String getMeanig() {
-        return meanig;
+    public String getMeaning() {
+        return meaning;
     }
 
-    public void setMeanig(String meanig) {
-        this.meanig = meanig;
+    public void setMeaning(String meaning) {
+        this.meaning = meaning;
     }
 
-    public String getDeckId() {
+    public Integer getDeckId() {
         return deckId;
     }
 
-    public void setDeckId(String deckId) {
+    public void setDeckId(Integer deckId) {
         this.deckId = deckId;
     }
 
-    public String getIs_completed() {
-        return is_completed;
+    public Integer getIsCompleted() {
+        return isCompleted;
     }
 
-    public void setIs_completed(String is_completed) {
-        this.is_completed = is_completed;
+    public void setIsCompleted(Integer isCompleted) {
+        this.isCompleted = isCompleted;
     }
 }

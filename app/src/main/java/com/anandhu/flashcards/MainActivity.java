@@ -4,8 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import com.anandhu.flashcards.FlashCardAdaptor;
-import com.anandhu.flashcards.FlashCards;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +11,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private FlashCardAdaptor fAdapter;
+    private DeckAdaptor fAdapter;
     private List<FlashCards> setList;
     private DataBaseHelper dataBaseHelper;
 
@@ -29,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         //getting the recyclerview from xml
         mRecyclerView = (RecyclerView) findViewById(R.id.idRecyclerView);
-        //mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         setList = new ArrayList<>();
@@ -38,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //set adapter to recyclerview
-        fAdapter = new FlashCardAdaptor(setList,this);
+        fAdapter = new DeckAdaptor(setList,this);
         mRecyclerView.setAdapter(fAdapter);
     }
 }

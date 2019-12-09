@@ -1,8 +1,6 @@
 package com.anandhu.flashcards;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +21,7 @@ public class CardAdaptor extends RecyclerView.Adapter<CardAdaptor.CardViewHolder
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflate the layout file
-        View FlashCardView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_cards, parent, false);
+        View FlashCardView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_card, parent, false);
         CardAdaptor.CardViewHolder gvh = new CardAdaptor.CardViewHolder(FlashCardView);
         return gvh;
     }
@@ -31,7 +29,7 @@ public class CardAdaptor extends RecyclerView.Adapter<CardAdaptor.CardViewHolder
     @Override
     public void onBindViewHolder(CardAdaptor.CardViewHolder holder, final int position) {
         holder.txtSet.setText(cardList.get(position).getWord());
-        holder.txtMeaning.setText(cardList.get(position).getMeanig());
+        holder.txtMeaning.setText(cardList.get(position).getMeaning());
 
     }
 

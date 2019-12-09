@@ -9,7 +9,7 @@ import android.content.Intent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cards extends AppCompatActivity{
+public class CardActivity extends AppCompatActivity{
     private RecyclerView mRecyclerView;
     private CardAdaptor fAdapter;
     private List<Card> setList;
@@ -38,13 +38,11 @@ public class Cards extends AppCompatActivity{
             for(int i = 0; i < deckList.size(); i++){
                 ca = new Card();
                 ca.setWord(deckList.get(i).getWord());
-                ca.setMeanig(deckList.get(i).getMeanig());
+                ca.setMeaning(deckList.get(i).getMeaning());
                 setList.add(ca);
             }
 
-
             //set adapter to recyclerview
-            //mRecyclerView = (RecyclerView) findViewById(R.id.);
             fAdapter = new CardAdaptor(setList, this);
             mRecyclerView.setAdapter(fAdapter);
         }catch (Exception e){

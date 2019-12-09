@@ -1,32 +1,31 @@
 package com.anandhu.flashcards;
 
 public class Deck{
-    public Integer Id;
-    public String Name;
-    public String Is_completed;
-
+    public Integer id;
+    public String name;
+    public Integer isCompleted;
 
     public Integer getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Integer id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    public String getIs_completed() {
-        return Is_completed;
+    public Integer getIsCompleted() {
+        return isCompleted;
     }
 
-    public void setIs_completed(String is_completed) {
-        Is_completed = is_completed;
+    public void setIsCompleted(Integer isCompleted) {
+        this.isCompleted = isCompleted;
     }
 }

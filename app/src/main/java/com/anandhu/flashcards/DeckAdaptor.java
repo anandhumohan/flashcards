@@ -8,14 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.*;
+import java.util.List;
 
-public class FlashCardAdaptor extends RecyclerView.Adapter<FlashCardAdaptor.FlashCardViewHolder>{
+public class DeckAdaptor extends RecyclerView.Adapter<DeckAdaptor.FlashCardViewHolder>{
     private List<FlashCards> flashCardsList;
     private FlashCards flashCards;
     Context context;
 
-    public FlashCardAdaptor(List<FlashCards> flashCardsList, Context context) {
+    public DeckAdaptor(List<FlashCards> flashCardsList, Context context) {
         this.flashCardsList = flashCardsList;
         this.context = context;
     }
@@ -23,7 +23,7 @@ public class FlashCardAdaptor extends RecyclerView.Adapter<FlashCardAdaptor.Flas
     @Override
     public FlashCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflate the layout file
-        View FlashCardView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_flashcard, parent, false);
+        View FlashCardView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_deck, parent, false);
         FlashCardViewHolder gvh = new FlashCardViewHolder(FlashCardView);
         return gvh;
     }
@@ -37,9 +37,7 @@ public class FlashCardAdaptor extends RecyclerView.Adapter<FlashCardAdaptor.Flas
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intent = new Intent(context, Cards.class);
-                    System.out.print(position);
-                    System.out.print(flashCards.getSet());
+                    Intent intent = new Intent(context, CardActivity.class);
                     Integer id = position;
                     intent.putExtra("key", (id+1));
                     context.startActivity(intent);
